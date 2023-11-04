@@ -36,24 +36,32 @@ public class Manager {
 
     // Updates world and prints statistics to console 
     // TODO: Generalize parameters/add loops
-    public static void updateWorld(Consumer plankton, Autotroph phytoplankton)
+    public static void updateWorld(Ecosystem ecosystem)
     {
-        boolean successfulFeeding = Manager.runMetabolism(plankton);
+        boolean successfulFeeding;
 
-        runReproduction(plankton, successfulFeeding);
-        runDeath(plankton);
+        for (Consumer consumer : ecosystem.getConsumers())
+        {
+            successfulFeeding = Manager.runMetabolism(consumer);
+            runReproduction(consumer, successfulFeeding);
+            runDeath(consumer);
+            System.out.println();
+            System.out.println("" + consumer.getName() + ": ");
+            System.out.printf("%s%d%n%s%.2f%s%n",
+                    "Index: ", consumer.getIndex(), 
+                            "Size: ", consumer.getSize(), 
+                            " Million");
+        }
 
-        System.out.println();
-        System.out.println("Plankton: ");
-        System.out.printf("%s%d%n%s%.2f%s%n",
-                  "Index: ", plankton.getIndex(), 
-                          "Size: ", plankton.getSize(), 
-                          " Million");
-        System.out.println("Phytoplankton: ");
-        System.out.printf("%s%d%n%s%.2f%s%n", 
-                 "Index: ",  phytoplankton.getIndex(), 
-                         "Size: ", phytoplankton.getSize(), 
-                         " Million");
+        for (Autotroph autotroph : ecosystem.getAutotrophs())
+        {
+            System.out.println("" + autotroph.getName() + ": ");
+            System.out.printf("%s%d%n%s%.2f%s%n", 
+                    "Index: ",  autotroph.getIndex(), 
+                            "Size: ", autotroph.getSize(), 
+                            " Million");
+        }
+        
         System.out.println("-----------------------------------");
     }
 }

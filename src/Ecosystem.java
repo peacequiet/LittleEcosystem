@@ -1,15 +1,31 @@
 import java.util.*;
 
 public class Ecosystem {
-    protected HashSet<Population> ecosystem = new HashSet<Population>();
+    protected HashSet<Autotroph> autotrophs = new HashSet<Autotroph>();
+    protected HashSet<Consumer> consumers = new HashSet<Consumer>();
 
     public Ecosystem()
     {
 
     }
 
-    public void addPopulation(Population pop)
+    public HashSet<Autotroph> getAutotrophs()
     {
-        this.ecosystem.add(pop);
+        return this.autotrophs;
+    }
+
+    public HashSet<Consumer> getConsumers()
+    {
+        return this.consumers;
+    }
+
+    public void addAutotrophs(Autotroph pop )
+    {
+        this.autotrophs.add(pop);
+    }
+
+    public void addConsumers(Consumer pop)
+    {
+        this.consumers.add(pop);
     }
 }

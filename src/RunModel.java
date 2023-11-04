@@ -9,17 +9,22 @@ public class RunModel {
         plankton.setLink(phytoplankton, true);
         phytoplankton.setLink(plankton, false);
 
-        displayWorld(plankton, phytoplankton);
+        Ecosystem ecosystem = new Ecosystem();
+
+        ecosystem.addAutotrophs(phytoplankton);
+        ecosystem.addConsumers(plankton);
+
+        displayWorld(ecosystem);
     }
 
     // Lets us print to console with delay
-    private static void displayWorld(Consumer plankton, Autotroph phytoplankton) 
+    private static void displayWorld(Ecosystem ecosystem) 
     {
         Thread updateThread = new Thread(() -> 
         {
             for (int generation = 0; generation < 10; generation++) 
             {
-                Manager.updateWorld(plankton, phytoplankton);
+                Manager.updateWorld(ecosystem);
                 try 
                 {
                     Thread.sleep(1000);
