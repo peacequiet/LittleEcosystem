@@ -1,0 +1,54 @@
+import java.util.*;
+
+public abstract class Population {
+    protected int index;
+
+    protected double size;
+    protected double reproductionRate;
+    protected double deathRate;
+
+    protected HashMap<Population, Boolean> trophicLinks = new HashMap<Population, Boolean>();
+
+    public Population(int index, double size, double reproductionRate, double deathRate)
+    {
+        this.index = index;
+        this.size = size;
+        this.reproductionRate = reproductionRate;
+        this.deathRate = deathRate;
+    }
+
+    public int getIndex()
+    {
+        return this.index;
+    }
+
+    public double getSize()
+    {
+        return this.size;
+    }
+
+    public double getReproductionRate()
+    {
+        return this.reproductionRate;
+    }
+
+    public double getDeathRate()
+    {
+        return this.deathRate;
+    }
+
+    public HashMap<Population, Boolean> getTrophicLinks()
+    {
+        return this.trophicLinks;
+    }
+
+    public void setSize(double size)
+    {
+        this.size = size;
+    }
+
+    public void setLink(Population linkedPopulation, boolean direction)
+    {
+        trophicLinks.put(linkedPopulation, direction);
+    }
+}
