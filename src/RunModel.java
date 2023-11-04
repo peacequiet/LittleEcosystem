@@ -1,3 +1,4 @@
+// TODO: Create a set to hold all the populations for a given run
 public class RunModel {
     public static void main(String[] args) throws Exception {
         Consumer plankton = new Consumer(
@@ -9,6 +10,7 @@ public class RunModel {
         displayWorld(plankton, phytoplankton);
     }
 
+    // Lets us print to console with delay
     private static void displayWorld(Consumer plankton, Phytoplankton phytoplankton) 
     {
         Thread updateThread = new Thread(() -> 

@@ -1,6 +1,8 @@
 import java.util.*;
 
+// TODO: Utilize "name" field
 public abstract class Population {
+    protected String name;
     protected int index;
 
     protected double size;
@@ -15,6 +17,11 @@ public abstract class Population {
         this.size = size;
         this.reproductionRate = reproductionRate;
         this.deathRate = deathRate;
+    }
+
+    public String getName()
+    {
+        return this.name;
     }
 
     public int getIndex()

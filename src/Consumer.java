@@ -8,7 +8,6 @@ public class Consumer extends Population {
         this.metabolicRate = metabolicRate;
     }
 
-
     public void metabolize(Population food)
     {
         double popMetabolism = metabolicRate * size;

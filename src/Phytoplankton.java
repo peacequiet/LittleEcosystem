@@ -1,3 +1,4 @@
+// TODO: Fold into autotroph class
 public class Phytoplankton extends Population
 {
     public Phytoplankton(int index, double size, 

@@ -17,7 +17,8 @@ public class Manager {
         return check; // lets us know whether this pop fed or not
     }
 
-    // increases population based on rate    
+    // increases population based on rate
+    // TODO: Traverse every population in ecosystem    
     public static void runReproduction(Population population, boolean successfulFeeding)
     {
         if (successfulFeeding)
@@ -27,11 +28,14 @@ public class Manager {
     }
 
     // decreases population based on rate
+    // TODO: Traverse every population in ecosystem
     public static void runDeath(Consumer consumer)
     {
         consumer.setSize(consumer.getSize() - consumer.getDeathRate());
     }
 
+    // Updates world and prints statistics to console 
+    // TODO: Generalize parameters/add loops
     public static void updateWorld(Consumer plankton, Phytoplankton phytoplankton)
     {
         boolean successfulFeeding = Manager.runMetabolism(plankton);
