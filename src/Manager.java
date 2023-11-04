@@ -35,16 +35,17 @@ public class Manager {
     }
 
     // Updates world and prints statistics to console 
-    // TODO: Generalize parameters/add loops
     public static void updateWorld(Ecosystem ecosystem)
     {
         boolean successfulFeeding;
 
         for (Consumer consumer : ecosystem.getConsumers())
         {
+            // Separate into its own method
             successfulFeeding = Manager.runMetabolism(consumer);
             runReproduction(consumer, successfulFeeding);
             runDeath(consumer);
+            
             System.out.println();
             System.out.println("" + consumer.getName() + ": ");
             System.out.printf("%s%d%n%s%.2f%s%n",
