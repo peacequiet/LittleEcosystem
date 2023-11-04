@@ -10,6 +10,7 @@ public class Consumer extends Population {
         this.trophicRatio = trophicRatio;
     }
 
+    // gets how much to eat then deducts that amount from food pop
     public void metabolize(Population food)
     {
         double popMetabolism = metabolicRate * size;
