@@ -1,50 +1,59 @@
 public class Manager {
 
     // runs metabolism
-    public static boolean runMetabolism(Consumer consumer)
+    public static void runMetabolism(Consumer consumer)
     {
-        boolean check = false;
-
         for (Population consumerFood : consumer.getTrophicLinks().keySet()) {
             if (consumer.getTrophicLinks().get(consumerFood) 
                 && consumerFood.getSize() > 0)
             {
                 consumer.metabolize(consumerFood);
-                check = true;
             }
         }
+    }
 
-        return check; // lets us know whether this pop fed or not
+    public static double activateTrophicRatio(Consumer consumer)
+    {
+        double foodSize = 0;
+        for (Population consumerFood : consumer.getTrophicLinks().keySet()) 
+        {
+            foodSize += consumerFood.getSize();   
+        }
+
+        // This expression increases as the ratio of consumer size to food size decreases, 
+        // and decreases as said ratio increases.
+        return consumer.getTrophicRatio() / (consumer.getSize() / foodSize);
     }
 
     // increases population based on rate
     // TODO: Traverse every population in ecosystem    
-    public static void runReproduction(Population population, boolean successfulFeeding)
+    public static void runReproduction(Population population, double activeTrophicRatio)
     {
-        if (successfulFeeding)
-        {
-            population.setSize(population.getSize() + population.getReproductionRate());
-        }
+        double activeReproRate = population.getReproductionRate() * (1 - activeTrophicRatio);
+        population.setSize(population.getSize() + activeReproRate);
     }
 
     // decreases population based on rate
     // TODO: Traverse every population in ecosystem
-    public static void runDeath(Consumer consumer)
+    public static void runDeath(Consumer consumer, double activeTrophicRatio)
     {
-        consumer.setSize(consumer.getSize() - consumer.getDeathRate());
+        double activeDeathRate = consumer.getDeathRate() / (1 - activeTrophicRatio);
+        consumer.setSize(consumer.getSize() - activeDeathRate);
+    }
+
+    public static void calcConsumerPop(Consumer consumer)
+    {
+        runMetabolism(consumer);
+        runReproduction(consumer, activateTrophicRatio(consumer));
+        runDeath(consumer, activateTrophicRatio(consumer));
     }
 
     // Updates world and prints statistics to console 
     public static void updateWorld(Ecosystem ecosystem)
     {
-        boolean successfulFeeding;
-
         for (Consumer consumer : ecosystem.getConsumers())
         {
-            // Separate into its own method
-            successfulFeeding = Manager.runMetabolism(consumer);
-            runReproduction(consumer, successfulFeeding);
-            runDeath(consumer);
+            calcConsumerPop(consumer);
             
             System.out.println();
             System.out.println("" + consumer.getName() + ": ");

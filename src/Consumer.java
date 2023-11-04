@@ -1,13 +1,17 @@
 public class Consumer extends Population {
     private double metabolicRate;
-    private double trophicRatio; //TODO: Implement trophic ratio to regulate birth and death rates
+    private  final double trophicRatio = 0.1; //TODO: Implement trophic ratio to regulate birth and death rates
 
     public Consumer(String name, int index, double size, double metabolicRate,
-        double reproductionRate, double deathRate, double trophicRatio)
+        double reproductionRate, double deathRate)
     {
         super(name, index, size, reproductionRate, deathRate);
         this.metabolicRate = metabolicRate;
-        this.trophicRatio = trophicRatio;
+        // this.trophicRatio = trophicRatio;
+    }
+
+    public double getTrophicRatio() {
+        return trophicRatio;
     }
 
     // gets how much to eat then deducts that amount from food pop
