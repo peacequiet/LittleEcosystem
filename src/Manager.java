@@ -36,7 +36,7 @@ public class Manager {
 
     // Updates world and prints statistics to console 
     // TODO: Generalize parameters/add loops
-    public static void updateWorld(Consumer plankton, Phytoplankton phytoplankton)
+    public static void updateWorld(Consumer plankton, Autotroph phytoplankton)
     {
         boolean successfulFeeding = Manager.runMetabolism(plankton);
 

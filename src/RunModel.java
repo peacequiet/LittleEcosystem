@@ -1,9 +1,11 @@
 // TODO: Create a set to hold all the populations for a given run
 public class RunModel {
     public static void main(String[] args) throws Exception {
-        Consumer plankton = new Consumer(
-            1, 100, 0.2, .05, .07);
-        Phytoplankton phytoplankton = new Phytoplankton(2, 10000, 0, 0);
+        Consumer plankton 
+            = new Consumer("Plankton", 1, 100, 0.2, .05, .07, 0.1);
+        Autotroph phytoplankton 
+            = new Autotroph("Phytoplankton", 2, 10000, 0, 0);
+
         plankton.setLink(phytoplankton, true);
         phytoplankton.setLink(plankton, false);
 
@@ -11,7 +13,7 @@ public class RunModel {
     }
 
     // Lets us print to console with delay
-    private static void displayWorld(Consumer plankton, Phytoplankton phytoplankton) 
+    private static void displayWorld(Consumer plankton, Autotroph phytoplankton) 
     {
         Thread updateThread = new Thread(() -> 
         {

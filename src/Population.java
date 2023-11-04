@@ -3,6 +3,7 @@ import java.util.*;
 // TODO: Utilize "name" field
 public abstract class Population {
     protected String name;
+
     protected int index;
 
     protected double size;
@@ -11,8 +12,9 @@ public abstract class Population {
 
     protected HashMap<Population, Boolean> trophicLinks = new HashMap<Population, Boolean>();
 
-    public Population(int index, double size, double reproductionRate, double deathRate)
+    public Population(String name, int index, double size, double reproductionRate, double deathRate)
     {
+        this.name = name;
         this.index = index;
         this.size = size;
         this.reproductionRate = reproductionRate;
