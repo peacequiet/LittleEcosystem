@@ -16,15 +16,18 @@ public class Manager {
 
     public static double activateTrophicRatio(Consumer consumer)
     {
-        double foodSize = 0;
+        double minFoodSize = 0;
         for (Population consumerFood : consumer.getTrophicLinks().keySet()) 
         {
-            foodSize += consumerFood.getSize();   
+            if (consumerFood.getSize() <= minFoodSize || minFoodSize == 0)
+            {
+                minFoodSize = consumerFood.getSize();  
+            }
         }
 
         // This expression increases as the ratio of consumer size to food size decreases, 
         // and decreases as said ratio increases.
-        return consumer.getTrophicRatio() / (consumer.getSize() / foodSize);
+        return consumer.getTrophicRatio() / (consumer.getSize() / minFoodSize);
     }
 
     // Consumer reproduction
@@ -94,7 +97,6 @@ public class Manager {
     public static void createTrophicLink(Population consumer, Population target)
     {
         consumer.setLink(target, true);
-        target.setLink(consumer, false);
     }
 
     // Updates world and prints statistics to console 

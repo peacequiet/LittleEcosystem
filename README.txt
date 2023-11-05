@@ -1,0 +1,1 @@
+Just a little "ecosystem" toy to get acquainted with Polymorphism, Threads, Maps, and simulating nonlinear systems. 
