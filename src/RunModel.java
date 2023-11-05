@@ -2,13 +2,13 @@
 public class RunModel {
     public static void main(String[] args) throws Exception {
         Autotroph phytoplankton 
-            = new Autotroph("Phytoplankton", 1, 10000, 139.68, 50);
+            = new Autotroph("Phytoplankton", 1, 10000, 105, 50);
         Consumer plankton 
-            = new Consumer("Zooplankton", 2, 1000, 1, .5, .4);
+            = new Consumer("Zooplankton", 2, 1300, 1, 5, 4);
         Consumer combJellies 
-            = new Consumer("Comb Jellies", 3, 110, 5.3, .35, .2);
+            = new Consumer("Comb Jellies", 3, 110, 5.3, .035, .02);
         Consumer nettles
-            = new Consumer("Sea Nettles", 4, 10, 3.7, .1, .09);
+            = new Consumer("Sea Nettles", 4, 10, 3.7, .01, .009);
 
         Ecosystem ecosystem = new Ecosystem();
 
