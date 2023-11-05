@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class Manager {
 
     // runs metabolism
@@ -109,7 +111,7 @@ public class Manager {
             System.out.printf("%s%d%n%s%.2f%s%n",
                     "Index: ", consumer.getIndex(), 
                             "Size: ", consumer.getSize(), 
-                            " Million");
+                            " Million grams");
         }
 
         for (Autotroph autotroph : ecosystem.getAutotrophs())
@@ -119,7 +121,7 @@ public class Manager {
             System.out.printf("%s%d%n%s%.2f%s%n", 
                     "Index: ",  autotroph.getIndex(), 
                             "Size: ", autotroph.getSize(), 
-                            " Million");
+                            " Million grams");
         }
         
         System.out.println("-----------------------------------");
