@@ -1,5 +1,4 @@
-// Consumers consume other organisms
-// Their trophic relations are encoded in their trophicLinks
+// Consumers are organisms that consume other organisms
 public class Consumer extends Population {
     private double metabolicRate;
     private final double trophicRatio = 0.1; 

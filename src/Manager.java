@@ -51,19 +51,44 @@ public class Manager {
         autotroph.setSize(autotroph.getSize() - autotroph.getDeathRate());
     }
 
+    public static boolean popCheck(Population population)
+    {
+        if (population.getSize() <= 0)
+        {
+            return false;
+        }
+        return true;
+    }
+
     public static void calcConsumerPop(Consumer consumer)
     {
-        runMetabolism(consumer);
-        runReproduction(consumer, activateTrophicRatio(consumer));
-        runDeath(consumer, activateTrophicRatio(consumer));
+        if (popCheck(consumer))
+        {
+            runMetabolism(consumer);
+            runReproduction(consumer, activateTrophicRatio(consumer));
+            runDeath(consumer, activateTrophicRatio(consumer));
+        }
+        else
+        {
+            consumer.setSize(0);
+        }
     }
 
     public static void calcAutotrophPop(Autotroph autotroph)
     {
-        runReproduction(autotroph);
-        runDeath(autotroph);
+        if (popCheck(autotroph))
+        {
+            runReproduction(autotroph);
+            runDeath(autotroph);
+            popCheck(autotroph);
+        }
+        else 
+        {
+            autotroph.setSize(0);
+        }
     }
 
+    // Initializes trophic link between two populations
     public static void createTrophicLink(Population consumer, Population target)
     {
         consumer.setLink(target, true);
@@ -76,8 +101,10 @@ public class Manager {
         for (Consumer consumer : ecosystem.getConsumers())
         {
             calcConsumerPop(consumer);
-            
-            System.out.println();
+            if (!popCheck(consumer))
+            {
+                consumer.setSize(0);
+            }
             System.out.println("" + consumer.getName() + ": ");
             System.out.printf("%s%d%n%s%.2f%s%n",
                     "Index: ", consumer.getIndex(), 
@@ -88,7 +115,6 @@ public class Manager {
         for (Autotroph autotroph : ecosystem.getAutotrophs())
         {
             calcAutotrophPop(autotroph);
-
             System.out.println("" + autotroph.getName() + ": ");
             System.out.printf("%s%d%n%s%.2f%s%n", 
                     "Index: ",  autotroph.getIndex(), 

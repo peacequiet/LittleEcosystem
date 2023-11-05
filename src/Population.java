@@ -1,6 +1,5 @@
 import java.util.*;
 
-// TODO: Utilize "name" field
 public abstract class Population {
     protected String name;
 
@@ -56,6 +55,7 @@ public abstract class Population {
         this.size = size;
     }
 
+    // Sets trophic link. linkedPopulation is the target, direction indicates where the arrow is pointing
     public void setLink(Population linkedPopulation, boolean direction)
     {
         trophicLinks.put(linkedPopulation, direction);
