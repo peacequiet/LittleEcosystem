@@ -1,9 +1,11 @@
+// Consumers consume other organisms
+// Their trophic relations are encoded in their trophicLinks
 public class Consumer extends Population {
     private double metabolicRate;
-    private  final double trophicRatio = 0.1; //TODO: Implement trophic ratio to regulate birth and death rates
+    private final double trophicRatio = 0.1; 
 
-    public Consumer(String name, int index, double size, double metabolicRate,
-        double reproductionRate, double deathRate)
+    public Consumer(String name, int index, double size, 
+        double metabolicRate, double reproductionRate, double deathRate)
     {
         super(name, index, size, reproductionRate, deathRate);
         this.metabolicRate = metabolicRate;

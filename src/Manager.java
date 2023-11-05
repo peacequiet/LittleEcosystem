@@ -25,20 +25,30 @@ public class Manager {
         return consumer.getTrophicRatio() / (consumer.getSize() / foodSize);
     }
 
-    // increases population based on rate
-    // TODO: Traverse every population in ecosystem    
-    public static void runReproduction(Population population, double activeTrophicRatio)
+    // Consumer reproduction
+    public static void runReproduction(Consumer consumer, double activeTrophicRatio)
     {
-        double activeReproRate = population.getReproductionRate() * (1 - activeTrophicRatio);
-        population.setSize(population.getSize() + activeReproRate);
+        consumer.setSize((consumer.getSize() + consumer.getReproductionRate()) 
+            * (activeTrophicRatio));
     }
 
-    // decreases population based on rate
-    // TODO: Traverse every population in ecosystem
+    // Autotroph reproduction
+    public static void runReproduction(Autotroph autotroph)
+    {
+        autotroph.setSize(autotroph.getSize() + autotroph.getReproductionRate());
+    }
+
+    // Consumer death
     public static void runDeath(Consumer consumer, double activeTrophicRatio)
     {
-        double activeDeathRate = consumer.getDeathRate() / (1 - activeTrophicRatio);
-        consumer.setSize(consumer.getSize() - activeDeathRate);
+        consumer.setSize((consumer.getSize() - consumer.getDeathRate()) 
+            * (activeTrophicRatio));
+    }
+
+    // Autotroph death
+    public static void runDeath(Autotroph autotroph)
+    {
+        autotroph.setSize(autotroph.getSize() - autotroph.getDeathRate());
     }
 
     public static void calcConsumerPop(Consumer consumer)
@@ -46,6 +56,18 @@ public class Manager {
         runMetabolism(consumer);
         runReproduction(consumer, activateTrophicRatio(consumer));
         runDeath(consumer, activateTrophicRatio(consumer));
+    }
+
+    public static void calcAutotrophPop(Autotroph autotroph)
+    {
+        runReproduction(autotroph);
+        runDeath(autotroph);
+    }
+
+    public static void createTrophicLink(Population consumer, Population target)
+    {
+        consumer.setLink(target, true);
+        target.setLink(consumer, false);
     }
 
     // Updates world and prints statistics to console 
@@ -65,6 +87,8 @@ public class Manager {
 
         for (Autotroph autotroph : ecosystem.getAutotrophs())
         {
+            calcAutotrophPop(autotroph);
+
             System.out.println("" + autotroph.getName() + ": ");
             System.out.printf("%s%d%n%s%.2f%s%n", 
                     "Index: ",  autotroph.getIndex(), 

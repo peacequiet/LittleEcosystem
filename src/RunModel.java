@@ -2,12 +2,11 @@
 public class RunModel {
     public static void main(String[] args) throws Exception {
         Consumer plankton 
-            = new Consumer("Plankton", 1, 100, 1, .5, .4);
+            = new Consumer("Zooplankton", 1, 100, 1, .5, .4);
         Autotroph phytoplankton 
-            = new Autotroph("Phytoplankton", 2, 1000, 0, 0);
+            = new Autotroph("Phytoplankton", 2, 10000, 139.68, 50);
 
-        plankton.setLink(phytoplankton, true);
-        phytoplankton.setLink(plankton, false);
+        Manager.createTrophicLink(plankton, phytoplankton);
 
         Ecosystem ecosystem = new Ecosystem();
 
@@ -22,8 +21,9 @@ public class RunModel {
     {
         Thread updateThread = new Thread(() -> 
         {
-            for (int generation = 0; generation < 15; generation++) 
+            for (int generation = 0; generation < 200; generation++) 
             {
+                System.out.println("Generation " + generation);
                 Manager.updateWorld(ecosystem);
                 try 
                 {
